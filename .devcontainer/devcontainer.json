@@ -1,0 +1,27 @@
+{
+  "dockerComposeFile": "docker-compose.yml",
+  // "service": "${localWorkspaceFolderBasename}",
+  "service": "main",
+  // "workspaceFolder": "/workspace/${localWorkspaceFolderBasename}",
+  "workspaceFolder": "/workspace/main",
+  "features": {
+      "docker-from-docker": {
+          "version": "latest"
+      }
+  },
+    "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "dsznajder.es7-react-js-snippets",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached"
+  ]
+}

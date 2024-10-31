@@ -1,0 +1,26 @@
+version: '3'
+services:
+  main: #これがサービス名になる
+    # container_name: main #明示的にサービス名をつける。ただしスケーリングが命名の重複でできなくなるらしい
+    image: node:latest
+    ports:
+      - 3000:3000
+    volumes:
+      - type: bind
+        source: ..
+        target: /workspace/main
+    tty: true
+    # restart: always # docker付けたときに起動するか
+    init: true
+  mock:  #同じネットワーク内であれば、http://mock:80　とかでアクセスができる
+    # container_name: mock
+    image: golang:latest
+    volumes:
+      - type: bind
+        source: ../mock
+        target: /workspace/mock
+    tty: true
+    # depends_on: # 依存関係解消のための遅延起動（このプログラム上は特にいらない）
+    #   - test
+    restart: always
+    init: true
