@@ -1,2 +1,2 @@
-# docker-playground
-コンテナをガチャガチャ検証する場所
+# infra-playground
+インフラ周辺をガチャガチャ検証する場所
