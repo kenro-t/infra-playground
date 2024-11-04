@@ -1,0 +1,32 @@
+# Amazon提供のAWS CLIイメージをベースにする
+FROM amazon/aws-cli:latest
+
+# 必要なパッケージをインストール
+# RUN yum update -y && \
+#     yum install -y bash less groff
+
+
+
+
+# RUN yum install -y tar gzip && \
+#     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash \
+#     && nvm install --lts
+
+# Node.jsのインストール
+RUN curl -sL https://rpm.nodesource.com/setup_18.x | bash - && \
+    yum install -y nodejs
+
+# npmのアップデート
+RUN npm install -g npm@latest
+
+# デフォルトのシェルをbashに変更
+# SHELL ["/bin/bash", "-c"]
+
+# 作業ディレクトリを設定
+WORKDIR /aws
+
+# エントリーポイントをbashに設定
+ENTRYPOINT ["/bin/bash"]
+
+# CMD [ "bash" ]
+
