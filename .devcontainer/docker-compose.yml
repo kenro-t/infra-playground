@@ -11,7 +11,7 @@ services:
         target: /workspace/main
     tty: true
     # restart: always # docker付けたときに起動するか
-    init: true
+    # init: true
   mock:  #同じネットワーク内であれば、http://mock:80　とかでアクセスができる
     # container_name: mock
     image: golang:latest
