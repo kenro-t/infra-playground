@@ -1,0 +1,4 @@
+◇dockerImageを利用したコマンド
+docker run -it --rm -v $(pwd):/workspace -w /workspace hashicorp/terraform:latest
+
+TODO: 上記にエイリアスを指定して便利にコマンドを利用したい
