@@ -4,16 +4,22 @@
 
 
 ## メモ
-### git bashでdockerイメージを利用してaws cliを実行する
+### dockerイメージを利用してコマンド実行(git bash)
 
-git bashの場合（パスの指定方法が変わる）
+※  git bash用にパス指定方法を変更済
+
+参考
+https://hub.docker.com/r/amazon/aws-cli
+https://hub.docker.com/r/hashicorp/terraform
+
+aws cli
 ``` 
 docker run --rm -it -v /$HOME/.aws:/root/.aws amazon/aws-cli
 ```
 
-linuxの場合
+terraform
 ```
-docker run --rm -ti -v ~/.aws:/root/.aws amazon/aws-cli
+docker run -it --rm -v $(pwd -W):/workspace -w //workspace hashicorp/terraform:latest
 ```
 
 エイリアスの指定
@@ -23,10 +29,13 @@ vi ~/.bashrc
 
 .bashrc
 ```
-alias gs='自身の環境のコマンド'
+alias aws='docker run --rm -it -v /$HOME/.aws:/root/.aws amazon/aws-cli'
+alias terraform='docker run -it --rm -v $(pwd -W):/workspace -w //workspace hashicorp/terraform:latest'
 ```
 
 設定の反映
 ```
 source ~/.bashrc
 ```
+
+通常通りにコマンド操作できるようになる。
