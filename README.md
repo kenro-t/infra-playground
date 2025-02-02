@@ -15,3 +15,18 @@ linuxの場合
 ```
 docker run --rm -ti -v ~/.aws:/root/.aws amazon/aws-cli
 ```
+
+エイリアスの指定
+```
+vi ~/.bashrc
+```
+
+.bashrc
+```
+alias gs='自身の環境のコマンド'
+```
+
+設定の反映
+```
+source ~/.bashrc
+```
