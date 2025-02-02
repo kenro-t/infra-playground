@@ -8,7 +8,7 @@
 
 git bashの場合（パスの指定方法が変わる）
 ``` 
-docker run --rm -it -v /$(pwd -W)/.aws:/root/.aws amazon/aws-cli
+docker run --rm -it -v /$HOME/.aws:/root/.aws amazon/aws-cli
 ```
 
 linuxの場合
