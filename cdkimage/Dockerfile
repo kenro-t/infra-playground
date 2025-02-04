@@ -60,4 +60,4 @@ ENTRYPOINT ["npx", "cdk"]
 # docker run -it --rm -v "$(pwd):/app" -w //app cdk-test:latest --help
 
 
-# docker run -it --rm  -w //app -v "$(pwd):/app" cdk-test:latest init sample-app --language typescript
+# docker run -it --rm  -w //workspace -v "$(pwd):/workspace" aws-cdk-ts-image init sample-app --language typescript
