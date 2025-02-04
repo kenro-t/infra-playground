@@ -12,7 +12,7 @@ https://hub.docker.com/r/hashicorp/terraform
 
 aws cli
 ``` 
-docker run --rm -it -v /$HOME/.aws:/root/.aws amazon/aws-cli
+docker run --rm -it -v $HOME/.aws:/root/.aws amazon/aws-cli
 ```
 
 terraform
@@ -35,5 +35,3 @@ alias terraform='docker run -it --rm -v $(pwd):/workspace -w /workspace hashicor
 ```
 source ~/.bashrc
 ```
-
-通常通りにコマンド操作できるようになる。
