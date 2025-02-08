@@ -1,0 +1,16 @@
+# Terraformの一時ファイルとディレクトリ
+**/.terraform/*
+
+# tfstateファイル
+*.tfstate
+*.tfstate.*
+
+# 変数定義ファイル（機密情報を含む可能性があるため）
+*.tfvars
+
+# クラッシュログファイル
+crash.log
+
+# CLIの設定ファイル
+.terraformrc
+terraform.rc
