@@ -10,8 +10,8 @@ export const config = {
     // オンデマンド
     {
       capacityProvider: "FARGATE",
-      weight: 0,
-      base: 0,
+      weight: 1,
+      base: 1,
     },
   ],
 };

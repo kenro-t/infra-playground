@@ -2,16 +2,16 @@ import * as cdk from "aws-cdk-lib";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as ecr from "aws-cdk-lib/aws-ecr";
 
-import { Construct } from "constructs";
-import { servicceCapacityProviderStrategies } from "../../env/develop";
 
+import { Construct } from "constructs";
+import {config} from "../../env"
 
 export class CdkPlaygroundStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     // 環境毎の変数。実際には環境変数として埋め込まれたものを利用。
-    const APP_ENV = "develop";
+    const APP_ENV = process.env.APP_ENV || "develop";
 
     // TODO: VPCやサブネットまで用意して疎通まで確認する
 
@@ -68,7 +68,7 @@ export class CdkPlaygroundStack extends cdk.Stack {
       cluster,
       taskDefinition,
       desiredCount: 1,
-      capacityProviderStrategies: servicceCapacityProviderStrategies[APP_ENV],
+      capacityProviderStrategies: config.servicceCapacityProviderStrategies,
       assignPublicIp: true,
       // vpcSubnets: subnet,
       serviceName: "MyFargateService",
