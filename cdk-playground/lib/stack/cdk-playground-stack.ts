@@ -46,7 +46,7 @@ export class CdkPlaygroundStack extends cdk.Stack {
         "public.ecr.aws/aws-observability/aws-for-fluent-bit:init-latest"
       ),
       environment: {
-        // aws_fluent_bit_init_s3_1: "extra.conf", // TODO: 後で指定する
+        aws_fluent_bit_init_s3_1: "extra.conf",
       },
       logging: ecs.LogDriver.awsLogs({
         streamPrefix: "fluentbit-",
