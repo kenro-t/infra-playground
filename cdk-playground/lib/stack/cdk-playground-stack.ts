@@ -1,4 +1,5 @@
 import * as cdk from "aws-cdk-lib";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as ecr from "aws-cdk-lib/aws-ecr";
 
@@ -14,6 +15,23 @@ export class CdkPlaygroundStack extends cdk.Stack {
     const APP_ENV = process.env.APP_ENV || "develop";
 
     // TODO: VPCやサブネットまで用意して疎通まで確認する
+    const vpc = new ec2.Vpc(this, "MyVpc", {
+      maxAzs: 2,
+      subnetConfiguration: [
+        {
+          name: "public",
+          subnetType: ec2.SubnetType.PUBLIC,
+        },
+        {
+          name: "private",
+          subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+        },
+      ],
+    });
+
+    const subnet = vpc.selectSubnets({
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+    });
 
     // クラスターの作成
     const cluster = new ecs.Cluster(this, "MyCluster", {
