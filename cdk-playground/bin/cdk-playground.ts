@@ -4,5 +4,5 @@ import { CdkPlaygroundStack } from "../lib/stack/cdk-playground-stack";
 
 const app = new cdk.App();
 new CdkPlaygroundStack(app, "CdkPlaygroundStack", {
-  env: { account: "816069168084", region: "ap-northeast-1" },
+  env: { account: "MyAccount", region: "ap-northeast-1" },
 });
