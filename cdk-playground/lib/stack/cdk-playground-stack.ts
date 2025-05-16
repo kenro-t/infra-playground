@@ -3,6 +3,7 @@ import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as ecr from "aws-cdk-lib/aws-ecr";
 import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as s3 from "aws-cdk-lib/aws-s3";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 
 import * as path from "path";
@@ -65,6 +66,12 @@ export class CdkPlaygroundStack extends cdk.Stack {
     );
 
 
+    // S3バケットの作成
+    const myBucket = new s3.Bucket(this, "MyBucket", {
+      removalPolicy: cdk.RemovalPolicy.DESTROY, // スタック削除時にバケットも削除（開発用）
+      autoDeleteObjects: true, // バケット削除時に中身も削除（開発用）
+    });
+
     // const myLambda = new lambda.Function(this, "MyLambda", {
     //   functionName: "MyLambda",
     //   runtime: lambda.Runtime.NODEJS_22_X,
@@ -78,6 +85,8 @@ export class CdkPlaygroundStack extends cdk.Stack {
     //   securityGroups: [securityGroup],
     // });
 
+    
+
     // NodejsFunctionを使用してLambda関数を作成
     // NodejsFunctionは、TypeScriptで書かれたLambda関数を自動的にコンパイルしてデプロイする。
     const myLambda = new NodejsFunction(this, "MyLambda", {
@@ -90,7 +99,13 @@ export class CdkPlaygroundStack extends cdk.Stack {
       },
       vpc,
       securityGroups: [securityGroup],
+      bundling: {
+        
+      }
     });
+
+    myBucket.grantReadWrite(myLambda); // LambdaにS3バケットへの読み書き権限を付与
+
 
     const myLambdaUrl = new lambda.FunctionUrl(this, "MyLambdaUrl", {
       function: myLambda,
