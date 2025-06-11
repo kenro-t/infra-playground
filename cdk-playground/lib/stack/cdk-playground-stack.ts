@@ -38,18 +38,6 @@ export class CdkPlaygroundStack extends cdk.Stack {
       subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
     });
 
-    const securityGroup = new ec2.SecurityGroup(this, "MySecurityGroup", {
-      vpc,
-      allowAllOutbound: true,
-      description: "My security group",
-      securityGroupName: "MySecurityGroup",
-    });
-    securityGroup.addIngressRule(
-      ec2.Peer.anyIpv4(),
-      ec2.Port.tcp(80),
-      "Allow HTTP traffic from anywhere"
-    );
-
     // S3バケットの作成
     const myBucket = new s3.Bucket(this, "MyBucket", {
       removalPolicy: cdk.RemovalPolicy.DESTROY, // スタック削除時にバケットも削除（開発用）
@@ -66,7 +54,6 @@ export class CdkPlaygroundStack extends cdk.Stack {
     //     subnets: subnet.subnets,
     //   },
     //   vpc,
-    //   securityGroups: [securityGroup],
     // });
 
     
@@ -82,7 +69,6 @@ export class CdkPlaygroundStack extends cdk.Stack {
         subnets: subnet.subnets,
       },
       vpc,
-      securityGroups: [securityGroup],
       bundling: {
         
       }
