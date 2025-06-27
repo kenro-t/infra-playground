@@ -4,6 +4,7 @@ import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as ecr from "aws-cdk-lib/aws-ecr";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as s3 from "aws-cdk-lib/aws-s3";
+import * as sfn from "aws-cdk-lib/aws-stepfunctions";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 
 import * as path from "path";
@@ -107,5 +108,18 @@ export class CdkPlaygroundStack extends cdk.Stack {
       serviceName: "MyFargateService",
     });
 */
+
+    // stepfunctionsの定義
+    const myStateMachine = new sfn.StateMachine(this, "MyStateMachine", { 
+      definitionBody: sfn.DefinitionBody.fromChainable(
+        new sfn.Pass(this, "StartState", {
+          result: sfn.Result.fromObject({
+            message: "Hello from Step Functions!",
+          }),
+        })
+      ),
+      stateMachineName: "MyStateMachine",
+      timeout: cdk.Duration.minutes(5),
+    });
   }
 }
