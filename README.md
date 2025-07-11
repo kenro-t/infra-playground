@@ -35,3 +35,8 @@ alias terraform='docker run -it --rm -v $(pwd):/workspace -w /workspace hashicor
 ```
 source ~/.bashrc
 ```
+
+## CDK
+
+#### TypeScript AWS CDK で を使用して IaC プロジェクトを作成するためのベストプラクティス
+https://docs.aws.amazon.com/ja_jp/prescriptive-guidance/latest/best-practices-cdk-typescript-iac/best-practices.html
